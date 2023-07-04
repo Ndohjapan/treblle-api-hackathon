@@ -4,9 +4,10 @@
   "description": "Simple Messaging API",
   "main": "index.js",
   "scripts": {
-    "test": "npm run test",
-    "dev": "npm run dev",
-    "start": "npm start"
+    "test": "cross-env NODE_ENV=test jest --watch ./__tests__",
+    "dev": "cross-env NODE_ENV=dev nodemon index.js",
+    "stage": "cross-env NODE_ENV=stage node index.js",
+    "start": "cross-env NODE_ENV=prod node index.js"
   },
   "repository": {
     "type": "url",
@@ -25,10 +26,10 @@
   "dependencies": {
     "@treblle/express": "^0.0.6",
     "config": "^3.3.9",
+    "connect-mongo": "^5.0.0",
     "cors": "^2.8.5",
-    "cross-env": "^7.0.3",
-    "eslint": "^8.44.0",
     "express": "^4.18.2",
+    "express-session": "^1.17.3",
     "express-validator": "^7.0.1",
     "helmet": "^7.0.0",
     "hpp": "^0.2.3",
@@ -36,14 +37,18 @@
     "jest-watch-typeahead": "^2.2.2",
     "mongoose": "^7.3.1",
     "mongoose-paginate-v2": "^1.7.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
     "prettier": "^2.8.8",
     "supertest": "^6.3.3",
     "xss-clean": "^0.1.4"
   },
   "devDependencies": {
     "bcrypt": "^5.1.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.3.1",
-    "nodemon": "^2.0.22",
-    "mongodb": "^5.6.0"
+    "eslint": "^8.44.0",
+    "mongodb": "^5.6.0",
+    "nodemon": "^2.0.22"
   }
 }
