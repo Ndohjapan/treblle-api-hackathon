@@ -5,34 +5,32 @@ const { AuthService } = require("./auth-service");
 const service = new AuthService();
 
 const customUserFields = {
-	usernameField: "username",
-	passwordField: "password",
+  usernameField: "username",
+  passwordField: "password",
 };
 
 const verifyUserCallback = async (username, password, done) => {
-	try {
-		const user = await service.UserSignIn({ username, password });
-		return done(null, user);
-	} catch (error) {
-		return done(error);
-	}
+  try {
+    const user = await service.UserSignIn({ username, password });
+    return done(null, user);
+  } catch (error) {
+    return done(error);
+  }
 };
 
-
 const userStrategy = new LocalStrategy(customUserFields, verifyUserCallback);
-
 
 passport.use("user", userStrategy);
 
 passport.serializeUser((user, done) => {
-	done(null, user.id);
+  done(null, user.id);
 });
 
 passport.deserializeUser(async (userId, done) => {
-	try {
-		let user = await service.FindUserById(userId);
-		return done(null, user);
-	} catch (error) {
-		done(error);
-	}
+  try {
+    let user = await service.FindUserById(userId);
+    return done(null, user);
+  } catch (error) {
+    done(error);
+  }
 });

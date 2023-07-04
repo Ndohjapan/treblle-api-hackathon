@@ -9,5 +9,5 @@ const PORT = process.env.PORT || 7001;
 connectToDatabase();
 
 app.listen(PORT, async () => {
-	console.log("Server is running on port " + PORT);
+  console.log("Server is running on port " + PORT);
 });
