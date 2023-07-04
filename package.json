@@ -14,10 +14,6 @@
   ],
   "author": "Ndoh Joel",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Ndohjapan/treblle-api-hackathon/issues"
-  },
-  "homepage": "https://github.com/Ndohjapan/treblle-api-hackathon#readme",
   "dependencies": {
     "@treblle/express": "^0.0.6",
     "config": "^3.3.9",
