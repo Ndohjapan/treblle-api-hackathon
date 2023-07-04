@@ -4,6 +4,8 @@ module.exports = {
   logout_error: "Error logging out; Try again",
   user_server_error: "Cannot Find User",
   user_creation_error: "Cannot create user at this time",
+  user_connection_creation_error: "Cannot create user connection at this time",
+  user_connection_find_error: "Cannot find user connection at this time",
   username_format: "Username must be a string",
   username_exists: "Username already exists",
   username_null: "Username cannot be null",
@@ -17,5 +19,15 @@ module.exports = {
   lastname_null: "Lastname cannot be null",
   rate_limit_exceeded: "Rate Limit Exceeded",
   signup_successful: "Signup Successful",
-  res_header_not_accepted: "Response header not accepted"
+  res_header_not_accepted: "Response header not accepted",
+  userId_null: "User Id cannot be null or empty",
+  userId_format: "This is not a valid user id",
+  userconnection_max_size: "User Connection Must Be Between 2 Users",
+  user_connection_already_exists: "User Connection already exists between users",
+  user_connection_error_same_ids: "Cannot create connection between same user",
+  user_connection_not_found: "Cannot find user connection",
+  authentication_failure: "Token Expired; Invalid Token; Login",
+  authentication_forbidden: "No permission for this operation",
+  validation_failure: "Validation Failure",
+
 };

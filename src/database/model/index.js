@@ -1,4 +1,5 @@
 module.exports = {
   User: require("./User"),
-  Session: require("./Session")
+  Session: require("./Session"),
+  UserConnection: require("./User-Connection")
 };
