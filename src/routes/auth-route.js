@@ -15,7 +15,7 @@ module.exports = async (app) => {
   app.use(methodAllowed({methodAllow: "POST"}));
   app.use(setContentType);
   app.use(contentTypeHeader);
-  
+
   app.post(
     "/api/1.0/signup",
     rateLimiter({ secondsWindow: 300, allowedHits: 5 }),
@@ -52,7 +52,7 @@ module.exports = async (app) => {
   // eslint-disable-next-line no-unused-vars
   app.post(
     "/api/1.0/logout",
-    rateLimiter({ secondsWindow: 10, allowedHits: 4 }),
+    rateLimiter({ secondsWindow: 60, allowedHits: 5 }),
     catchAsync(async (req, res, next) => {
       req.logout(function (err) {
         if (err) {
