@@ -8,10 +8,6 @@
     "dev": "npm run dev",
     "start": "npm start"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Ndohjapan/treblle-api-hackathon.git"
-  },
   "keywords": [
     "Messaging",
     "API"
