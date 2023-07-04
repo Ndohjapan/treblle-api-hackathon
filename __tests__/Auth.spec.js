@@ -1,26 +1,12 @@
 const request = require("supertest");
 const { app } = require("../src/app");
-const {
-  connectToDatabase,
-  mongoose,
-  redis,
-} = require("../src/database/connection");
+require("./resources/setup");
 const { User, Session } = require("../src/database/model");
 const en = require("../locale/en");
 const credentials = { username: "Ndohjapan", password: "P4ssword@" };
 const mockData = require("./resources/mock-data");
 
 let cookie;
-
-beforeEach(async () => {
-  await connectToDatabase();
-});
-
-afterEach(async () => {
-  await mongoose.connection.dropDatabase();
-  await mongoose.connection.close();
-  await redis.flushdb();
-});
 
 const addUser = async (user = mockData.user1) => {
   const data = await User.create(user);
@@ -45,6 +31,7 @@ const userLogin = async (user = credentials) => {
 const userLogout = async () => {
   let agent = await request(app)
     .post("/api/1.0/logout")
+    .set("Content-Type", "application/json")
     .set("Cookie", cookie)
     .send();
 
