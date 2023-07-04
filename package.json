@@ -8,7 +8,9 @@
     "stage": "cross-env NODE_ENV=stage node index.js",
     "dev": "cross-env NODE_ENV=dev nodemon index.js",
     "test": "cross-env NODE_ENV=test jest --watch ./__tests__ && npm run test:cleanup",
-    "test:cleanup": "cross-env NODE_ENV=test node testdb-cleanup.js"
+    "test:cleanup": "cross-env NODE_ENV=test node testdb-cleanup.js",
+    "seed:up": "cross-env NODE_ENV=dev node src/database/seed.js up",
+    "seed:down": "cross-env NODE_ENV=dev node src/database/seed.js down"
   },
   "repository": {
     "type": "url",

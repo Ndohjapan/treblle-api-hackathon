@@ -8,14 +8,16 @@ const { mongoose } = require("./database/connection");
 const session = require("express-session");
 const MongoStore = require("connect-mongo");
 const treblle = require("@treblle/express");
-
+const config = require("config");
 require("dotenv").config();
 
-const config = require("config");
+const treblleConfig = config.get("treblle");
+
 const errorHandler = require("./error/error-handler");
 const en = require("../locale/en");
 const NotFundException = require("./error/not-found-exception");
 const { auth } = require("./routes");
+const { securityResponseHeader } = require("./middleware/res-header");
 
 const app = express();
 
@@ -25,11 +27,16 @@ app.use(express.urlencoded({ extended: true, limit: "1mb" }));
 app.use(helmet());
 app.use(xss());
 app.use(hpp());
+app.use(securityResponseHeader);
 
 // eslint-disable-next-line no-undef
 if (process.env.NODE_ENV !== "test") {
   app.use(interceptorParam);
-  app.use(treblle());
+  app.use(  treblle({
+    apiKey: treblleConfig.apiKey,
+    projectId: treblleConfig.projectId,
+    additionalFieldsToMask: [],
+  }));
 }
 
 

@@ -16,5 +16,6 @@ module.exports = {
   lastname_format: "Lastname must be a string",
   lastname_null: "Lastname cannot be null",
   rate_limit_exceeded: "Rate Limit Exceeded",
-  signup_successful: "Signup Successful"
+  signup_successful: "Signup Successful",
+  res_header_not_accepted: "Response header not accepted"
 };

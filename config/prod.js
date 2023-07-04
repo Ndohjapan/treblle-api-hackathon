@@ -12,4 +12,9 @@ module.exports = {
   redis: {
     URL: process.env.REDISCLOUD_URL,
   },
+
+  treblle: {
+    apiKey: process.env.TREBLLE_API_KEY,
+    projectId: process.env.TREBLLE_PROJECT_ID
+  }
 };

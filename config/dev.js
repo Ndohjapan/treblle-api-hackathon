@@ -10,6 +10,11 @@ module.exports = {
   },
 
   redis: {
-    URL: "127.0.0.1:6380",
+    URL: "127.0.0.1:6379",
   },
+
+  treblle: {
+    apiKey: process.env.TREBLLE_API_KEY,
+    projectId: process.env.TREBLLE_PROJECT_ID
+  }
 };
