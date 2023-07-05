@@ -1,5 +1,6 @@
 const {
   validateUserId,
+  validateUserUpdateInput
 } = require("../middleware/input-validations/user-input-validation");
 const catchAsync = require("../util/catch-async");
 const { rateLimiter } = require("../middleware/rate-limiter");
@@ -51,6 +52,7 @@ module.exports = async (app) => {
   app.patch(
     "/api/1.0/users/:id",
     rateLimiter({ secondsWindow: 60, allowedHits: 10 }),
+    validateUserUpdateInput,
     userAuth,
     catchAsync(async (req, res) => {
       let data = req.body;
