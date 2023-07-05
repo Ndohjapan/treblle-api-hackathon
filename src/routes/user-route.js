@@ -5,7 +5,6 @@ const catchAsync = require("../util/catch-async");
 const { rateLimiter } = require("../middleware/rate-limiter");
 const {
   methodAllowed,
-  contentTypeHeader,
   setContentType,
 } = require("../middleware/res-header");
 const { UserService } = require("../service/user-service");
@@ -16,7 +15,6 @@ module.exports = async (app) => {
 
   app.use(methodAllowed({ methodAllow: "GET" }));
   app.use(setContentType);
-  app.use(contentTypeHeader);
 
   app.get(
     "/api/1.0/users",

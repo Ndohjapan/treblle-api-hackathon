@@ -7,14 +7,13 @@ const passport = require("passport");
 const { rateLimiter } = require("../middleware/rate-limiter");
 const { AuthService } = require("../service/auth-service");
 const en = require("../../locale/en");
-const {methodAllowed, contentTypeHeader, setContentType} = require("../middleware/res-header");
+const {methodAllowed, setContentType} = require("../middleware/res-header");
 
 module.exports = async (app) => {
   const service = new AuthService();
 
   app.use(methodAllowed({methodAllow: "POST"}));
   app.use(setContentType);
-  app.use(contentTypeHeader);
 
   app.post(
     "/api/1.0/signup",

@@ -9,6 +9,10 @@ module.exports = {
     secret: "ji291812m92hwe2QAA2@ew!jewufiw0+302-jfjD$!@1d",
   },
 
+  jwt: {
+    secret: "wofenwonewoinewoioewnoewiew"
+  },
+
   redis: {
     URL: "127.0.0.1:6379",
   },
@@ -17,7 +21,7 @@ module.exports = {
     apiKey: process.env.TREBLLE_API_KEY,
     projectId: process.env.TREBLLE_PROJECT_ID
   },
-  
+
   cloudinary: {
     cloudName: process.env.CLOUD_NAME,
     apiKey: process.env.CLOUDINARY_KEY,

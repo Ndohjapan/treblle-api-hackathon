@@ -9,6 +9,10 @@ module.exports = {
     secret: process.env.SESSION_KEY,
   },
 
+  jwt: {
+    secret: process.env.JWT_SECRET,
+  },
+
   redis: {
     URL: process.env.REDISCLOUD_URL,
   },

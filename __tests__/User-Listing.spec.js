@@ -10,6 +10,7 @@ const {
 const mockData = require("./resources/mock-data");
 
 let cookie;
+let token;
 
 describe("Get by id", () => {
   const getUser = async (id) => {
@@ -17,8 +18,9 @@ describe("Get by id", () => {
       .get(`/api/1.0/users/${id}`)
       .set("Content-Type", "application/json");
 
-    if (cookie) {
+    if (cookie && token) {
       agent.set("Cookie", cookie);
+      agent.set("Authorization", `Bearer ${token}`);
     }
 
     return await agent.send();
@@ -26,7 +28,9 @@ describe("Get by id", () => {
 
   it("returns - HTTP 429 when we try to get user without login", async () => {
     const users = await addUser(1);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     await getUser(users[0].id);
     await getUser(users[0].id);
@@ -47,7 +51,9 @@ describe("Get by id", () => {
 
   it(`returns - ${en.rate_limit_exceeded} when we try to get user without login`, async () => {
     const users = await addUser(1);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     await getUser(users[0].id);
     await getUser(users[0].id);
@@ -84,7 +90,9 @@ describe("Get by id", () => {
 
   it("returns - HTTP 200 ok when we get user  with authenticated request", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await getUser(users[0].id);
 
@@ -93,7 +101,9 @@ describe("Get by id", () => {
 
   it("returns - user  data when we get user  with authenticated request", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await getUser(users[0].id);
 
@@ -102,7 +112,9 @@ describe("Get by id", () => {
 
   it("returns - HTTP 400  when we get user  with wrongly formatted id", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await getUser("eiwnowin");
 
@@ -126,8 +138,9 @@ describe("Get all with pagination", () => {
       .query({ page, limit, filters })
       .set("Content-Type", "application/json");
 
-    if (cookie) {
+    if (cookie && token) {
       agent.set("Cookie", cookie);
+      agent.set("Authorization", `Bearer ${token}`);
     }
 
     return await agent.send();
@@ -135,7 +148,9 @@ describe("Get all with pagination", () => {
 
   it("returns - HTTP 429 when we try to get user without login", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     await getUsers(users[0].id);
     await getUsers(users[0].id);
@@ -156,7 +171,9 @@ describe("Get all with pagination", () => {
 
   it(`returns - ${en.rate_limit_exceeded} when we try to get user without login`, async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     await getUsers(users[0].id);
     await getUsers(users[0].id);
@@ -193,7 +210,9 @@ describe("Get all with pagination", () => {
 
   it("returns - HTTP 200 ok when we get users with authenticated request", async () => {
     const users = await addUser(3);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await getUsers();
 
@@ -202,7 +221,9 @@ describe("Get all with pagination", () => {
 
   it("returns - user  data when we get users  with authenticated request", async () => {
     const users = await addUser(25);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await getUsers();
 
@@ -212,7 +233,9 @@ describe("Get all with pagination", () => {
 
   it("returns - user connections of a particular using the filter", async () => {
     const users = await addUser(4);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await getUsers(1, 10, { firstname: "Joel" });
 

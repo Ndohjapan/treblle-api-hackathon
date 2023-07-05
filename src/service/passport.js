@@ -23,7 +23,7 @@ const userStrategy = new LocalStrategy(customUserFields, verifyUserCallback);
 passport.use("user", userStrategy);
 
 passport.serializeUser((user, done) => {
-  done(null, user.id);
+  done(null, user.user.id);
 });
 
 passport.deserializeUser(async (userId, done) => {
