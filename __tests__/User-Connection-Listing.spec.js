@@ -7,7 +7,6 @@ const {
   addUser,
   userLogin,
 } = require("./resources/frequent-functions");
-const { UserConnection } = require("../src/database/model");
 
 let cookie;
 
@@ -238,11 +237,9 @@ describe("Get all with pagination", () => {
     await createUserConnection(users[0].id, users[3].id);
     await createUserConnection(users[1].id, users[2].id);
 
-    const response = await getuserConnections(1, 10, {users: users[0].id});
+    const response = await getuserConnections(1, 10, { users: users[0].id });
 
     expect(response.body.limit).toBe(10);
     expect(response.body.totalDocs).toBe(3);
-
-  
   });
 });
