@@ -47,6 +47,11 @@ This is a simple messaging from the Springbok dev
     ```
     - Install on your computer: https://www.mongodb.com/docs/manual/installation/
 
+- ### Install Node Packages
+    ```
+    npm install 
+    ```    
+
 - ### Start App
     You can start the app immediately using 
     ```

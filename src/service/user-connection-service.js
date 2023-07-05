@@ -32,7 +32,7 @@ class UserConnectionService {
         throw new CreationException(en.user_connection_already_exists, 409);
       }
 
-      if(error.status === 400){
+      if (error.status === 400) {
         throw new CreationException(en.user_connection_error_same_ids, 400);
       }
 
@@ -72,7 +72,7 @@ class UserConnectionService {
       const users = await this.repository.FilterUserConnections({
         page,
         limit,
-        data,
+        data: updateData,
       });
       return users;
     } catch (error) {

@@ -4,7 +4,6 @@ const {
   redis,
 } = require("../../src/database/connection");
 
-
 beforeEach(async () => {
   await connectToDatabase();
 });

@@ -13,6 +13,8 @@ module.exports = {
   password_null: "Password cannot be null",
   password_length: "Password must be 8 character long or more",
   password_requirement: "Password must contain Uppercase, Lowercase, Number and Symbol",
+  id_null: "Id cannot be null",
+  id_format: "Id must be a string",
   firstname_format: "Firstname must be a string",
   firstname_null: "Firstname cannot be null",
   lastname_format: "Lastname must be a string",

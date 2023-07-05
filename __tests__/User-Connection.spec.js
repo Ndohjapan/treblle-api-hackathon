@@ -1,10 +1,7 @@
 const request = require("supertest");
 const { app } = require("../src/app");
 require("./resources/setup");
-const { User } = require("../src/database/model");
 const en = require("../locale/en");
-const credentials = { username: "Ndohjapan", password: "P4ssword@" };
-const mockData = require("./resources/mock-data");
 const { addUser, userLogin } = require("./resources/frequent-functions");
 
 let cookie;
