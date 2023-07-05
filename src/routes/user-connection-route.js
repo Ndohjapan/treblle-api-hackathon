@@ -1,5 +1,6 @@
 const {
   validateCreateUserConnectionInput,
+  validateUserConnectionId,
 } = require("../middleware/user-connection-validation");
 const catchAsync = require("../util/catch-async");
 const { rateLimiter } = require("../middleware/rate-limiter");
@@ -23,11 +24,24 @@ module.exports = async (app) => {
     rateLimiter({ secondsWindow: 60, allowedHits: 10 }),
     userAuth,
     catchAsync(async (req, res) => {
-      let { page, limit } = req.query;
+      let { page, limit, ...filters } = req.query;
       page = page ? page : 1;
       limit = limit ? limit : 10;
-      const userConnections = await service.FindAll({ page, limit });
+      let data = filters.filters ? filters.filters : {};
+      const userConnections = await service.FilterUserConnections({page, limit, data});
       res.send(userConnections);
+    })
+  );
+
+  app.get(
+    "/api/1.0/connections/:id",
+    rateLimiter({ secondsWindow: 60, allowedHits: 10 }),
+    validateUserConnectionId,
+    userAuth,
+    catchAsync(async (req, res) => {
+      const id = req.params.id;
+      const userConnection = await service.FindById(id);
+      res.send(userConnection);
     })
   );
 
