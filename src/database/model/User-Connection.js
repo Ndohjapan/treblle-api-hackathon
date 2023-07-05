@@ -27,4 +27,4 @@ UserConnectionSchema.index(
   { unique: true, partialFilterExpression: { students: { $exists: true, $ne: [] } } }
 );
 
-module.exports =  mongoose.model("message", UserConnectionSchema);
+module.exports =  mongoose.model("user-connection", UserConnectionSchema);

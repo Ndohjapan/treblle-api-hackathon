@@ -1,6 +1,3 @@
-const en = require("../../locale/en");
-const NotAcceptedException = require("../error/not-accepted-exception");
-
 const methodAllowed = ({methodAllow = "POST"}) => {
   return async function(req, res, next){
     res.setHeader("Allow", methodAllow); 
