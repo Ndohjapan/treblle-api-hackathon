@@ -1,7 +1,7 @@
 const {
   validateCreateUserConnectionInput,
   validateUserConnectionId,
-} = require("../middleware/user-connection-validation");
+} = require("../middleware/input-validations/user-connection-validation");
 const catchAsync = require("../util/catch-async");
 const { rateLimiter } = require("../middleware/rate-limiter");
 const {

@@ -1,7 +1,7 @@
 const {
   validateUserLoginInput,
   validateUserSignupInput,
-} = require("../middleware/auth-input-validator");
+} = require("../middleware/input-validations/auth-input-validator");
 const catchAsync = require("../util/catch-async");
 const passport = require("passport");
 const { rateLimiter } = require("../middleware/rate-limiter");

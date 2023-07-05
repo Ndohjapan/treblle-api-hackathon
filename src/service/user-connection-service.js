@@ -50,14 +50,6 @@ class UserConnectionService {
     }
   }
 
-  async FindAll({ page, limit }) {
-    try {
-      const userConnections = await this.repository.FindAll({ page, limit });
-      return userConnections;
-    } catch (error) {
-      throw new NotFoundException(en.user_connection_not_found);
-    }
-  }
 
   async FilterUserConnections({ page, limit, data }) {
     let updateData = {};
