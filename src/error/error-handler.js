@@ -5,7 +5,7 @@ module.exports = (err, req, res, next) => {
   let validationErrors;
   if (errors) {
     validationErrors = {};
-    errors.forEach((error) => (validationErrors[error.path] = error.msg));
+    errors.forEach((error) => (validationErrors[error.path || "file"] = error.msg || error.message));
   }
   res.status(status).send({
     path: req.originalUrl,
