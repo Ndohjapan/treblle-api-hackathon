@@ -10,6 +10,7 @@ module.exports = async (app) => {
   app.use(setContentType);
   app.use(methodAllowed({ methodAllow: "POST" }));
 
+
   app.post(
     "/api/1.0/files",
     rateLimiter({ secondsWindow: 60, allowedHits: 10 }),

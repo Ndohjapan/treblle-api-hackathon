@@ -5,6 +5,7 @@ const { app } = require("../../src/app");
 const userCredentials = { username: "Ndohjapan", password: "P4ssword@" };
 
 let cookie;
+let token;
 
 const addUser = async (num = 1, user = mockData.user1) => {
   const users = [user];
@@ -26,7 +27,8 @@ const userLogin = async (user = userCredentials) => {
   let agent = await request(app).post("/api/1.0/login").send(user);
 
   cookie = agent.headers["set-cookie"];
-  return cookie;
+  token = agent.body.token;
+  return {cookie, token};
 };
 
 const createUserConnection = async (user1, user2) => {

@@ -21,14 +21,6 @@ const setContentType = (req, res, next) => {
   next();
 };
 
-const contentTypeHeader = (req, res, next) => {
-  const acceptHeader = req.get("Content-Type");
-  if (acceptHeader !== "application/json") {
-    return next(new NotAcceptedException(en.req_header_not_accepted));
-  }
-  next();
-};
 
 
-
-module.exports = {securityResponseHeader, methodAllowed, contentTypeHeader, setContentType};
+module.exports = {securityResponseHeader, methodAllowed, setContentType};

@@ -11,6 +11,7 @@ const {
 } = require("./resources/frequent-functions");
 
 let cookie;
+let token;
 
 describe("Upload files", () => {
   const uploadFile = async (connectionId, file = "test-jpg.jpg") => {
@@ -19,6 +20,7 @@ describe("Upload files", () => {
     return await request(app)
       .post("/api/1.0/files")
       .set("Cookie", cookie)
+      .set("Authorization", `Bearer ${token}`)
       .attach("file", filePath)
       .field("connectionId", connectionId);
   };
@@ -27,7 +29,9 @@ describe("Upload files", () => {
     const users = await addUser(2);
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile(userConnection.id);
 
@@ -38,7 +42,9 @@ describe("Upload files", () => {
     const users = await addUser(2);
     await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile("329h9329n39n323");
 
@@ -49,7 +55,9 @@ describe("Upload files", () => {
     const users = await addUser(2);
     await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile("329h9329n39n323");
 
@@ -61,7 +69,9 @@ describe("Upload files", () => {
     await createUserConnection(users[0].id, users[1].id);
     await createUserConnection(users[1].id, users[2].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile(users[0].id);
 
@@ -76,7 +86,9 @@ describe("Upload files", () => {
     await createUserConnection(users[0].id, users[1].id);
     const userConnection = await createUserConnection(users[1].id, users[2].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile(userConnection.id);
 
@@ -90,7 +102,9 @@ describe("Upload files", () => {
     const users = await addUser(2);
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile(userConnection.id, "test-pdf.pdf");
 
@@ -101,7 +115,9 @@ describe("Upload files", () => {
     const users = await addUser(2);
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile(userConnection.id, "test-pdf.pdf");
 
@@ -112,7 +128,9 @@ describe("Upload files", () => {
     const users = await addUser(2);
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const fiveMB = 5 * 1024 * 1024;
     // eslint-disable-next-line no-undef
@@ -129,13 +147,16 @@ describe("Upload files", () => {
     const users = await addUser(2);
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     // eslint-disable-next-line no-undef
     const filePath = path.resolve(__dirname, "resources", "test-png.png");
     const response = await request(app)
       .post("/api/1.0/files")
       .set("Cookie", cookie)
+      .set("Authorization", `Bearer ${token}`)
       .attach("file", filePath)
       .field("connectionId", userConnection.id)
       .field("field2", userConnection.id);
@@ -148,7 +169,9 @@ describe("Upload files", () => {
     const users = await addUser(2);
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await uploadFile(userConnection.id);
 

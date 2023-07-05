@@ -311,16 +311,16 @@ describe("User Login", () => {
     await addUser();
     const response = await userLogin();
 
-    expect(response.body.firstname).toBe(mockData.user1.firstname);
+    expect(response.body.user.firstname).toBe(mockData.user1.firstname);
   });
 
   it("check - ensure no password, createdAt and updatedAt is returned on successful login", async () => {
     await addUser();
     const response = await userLogin();
 
-    expect(response.body.password).toBeFalsy();
-    expect(response.body.createdAt).toBeFalsy();
-    expect(response.body.updatedAt).toBeFalsy();
+    expect(response.body.user.password).toBeFalsy();
+    expect(response.body.user.createdAt).toBeFalsy();
+    expect(response.body.user.updatedAt).toBeFalsy();
   });
 
   it("check - the session collection to see if the user session is registered", async () => {

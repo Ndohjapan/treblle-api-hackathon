@@ -5,12 +5,14 @@ const en = require("../locale/en");
 const { addUser, userLogin } = require("./resources/frequent-functions");
 
 let cookie;
+let token;
 
 const createUserConnection = async (data) => {
   let agent = request(app).post("/api/1.0/connections");
 
-  if (cookie) {
+  if (cookie && token) {
     agent.set("Cookie", cookie);
+    agent.set("Authorization", `Bearer ${token}`);
   }
 
   return await agent.send(data);
@@ -35,7 +37,9 @@ describe("Create User Connection", () => {
 
   it(`return - HTTP 429 and "${en.rate_limit_exceeded}" when user connection is created successfully`, async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     await createUserConnection({ userId: users[1].id });
     await createUserConnection({ userId: users[1].id });
@@ -66,7 +70,9 @@ describe("Create User Connection", () => {
     "returns - HTTP 400  and '$message' when userId is wrongly formatted to '$userId'",
     async ({ userId, message }) => {
       await addUser(2);
-      cookie = await userLogin();
+      let auth = await userLogin();
+      cookie = auth.cookie;
+      token = auth.token;
 
       const response = await createUserConnection({ userId });
 
@@ -78,7 +84,9 @@ describe("Create User Connection", () => {
 
   it("return - HTTP 200 ok when user connection is created successfully", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await createUserConnection({ userId: users[1].id });
 
@@ -87,7 +95,9 @@ describe("Create User Connection", () => {
 
   it("return - user connection data when user connection is created successfully", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await createUserConnection({ userId: users[1].id });
 
@@ -98,7 +108,9 @@ describe("Create User Connection", () => {
 
   it("return - HTTP 409 when we try to create connection between already connected users", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     await createUserConnection({ userId: users[1].id });
     
@@ -110,7 +122,9 @@ describe("Create User Connection", () => {
 
   it(`return - ${en.user_connection_already_exists} when we try to create connection between already connected users`, async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     await createUserConnection({ userId: users[1].id });
     
@@ -122,11 +136,15 @@ describe("Create User Connection", () => {
 
   it(`return - ${en.user_connection_already_exists} when we try to create connection between already connected users`, async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
     
     await createUserConnection({ userId: users[1].id });
     
-    cookie = await userLogin({username: "Ndohjapan1", password: "P4ssword@"});
+    auth = await userLogin({username: "Ndohjapan1", password: "P4ssword@"});
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await createUserConnection({ userId: users[0].id });
     
@@ -136,7 +154,9 @@ describe("Create User Connection", () => {
 
   it("return - HTTP 400 when we try to create connection with 2 same user ids", async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await createUserConnection({ userId: users[0].id });
         
@@ -146,7 +166,9 @@ describe("Create User Connection", () => {
 
   it(`return - ${en.user_connection_already_exists} when we try to create connection with 2 same user ids`, async () => {
     const users = await addUser(2);
-    cookie = await userLogin();
+    let auth = await userLogin();
+    cookie = auth.cookie;
+    token = auth.token;
 
     const response = await createUserConnection({ userId: users[0].id });
         

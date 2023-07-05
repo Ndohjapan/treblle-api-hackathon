@@ -3,6 +3,9 @@ const AuthException = require("../error/auth-exception");
 const en = require("../../locale/en");
 const NotFoundException = require("../error/not-found-exception");
 const bcrypt = require("bcrypt");
+const config = require("config");
+const jwtConfig = config.get("jwt");
+const jwt = require("jsonwebtoken");
 
 class AuthService {
   constructor() {
@@ -51,7 +54,9 @@ class AuthService {
 
         if (passwordCheck) {
           existingUser.password = undefined;
-          return existingUser;
+          const secretKey = jwtConfig.secret;
+          const token = jwt.sign({username}, secretKey, { expiresIn: "1d" });
+          return {user: existingUser, token};
         }
       }
 
