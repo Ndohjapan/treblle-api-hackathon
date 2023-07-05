@@ -6,6 +6,7 @@ This is a simple messaging from the Springbok dev
 
 - Users are able to create an account using the `signup` endpoint
 - Users can login using the `login` endpoint
+- Users can update their firstname and lastname using the `users` endpoint
 - Users can establish connection with another user with `connection` endpoint
 - Users can also view all their connections using the `connection` endpoint
 - Users can send text messages to their connections using the `message` endpoint 
