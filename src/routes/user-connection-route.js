@@ -19,13 +19,14 @@ module.exports = async (app) => {
 
   app.get(
     "/api/1.0/connections",
-    rateLimiter({ secondsWindow: 60, allowedHits: 10 }),
+    rateLimiter({ secondsWindow: 60, allowedHits: 20 }),
     userAuth,
     catchAsync(async (req, res) => {
       let { page, limit, ...filters } = req.query;
       page = page ? page : 1;
       limit = limit ? limit : 10;
-      let data = filters.filters ? filters.filters : {};
+      let data = filters;
+      console.log(data, filters);
       const userConnections = await service.FilterUserConnections({page, limit, data});
       res.send(userConnections);
     })
@@ -33,7 +34,7 @@ module.exports = async (app) => {
 
   app.get(
     "/api/1.0/connections/:id",
-    rateLimiter({ secondsWindow: 60, allowedHits: 10 }),
+    rateLimiter({ secondsWindow: 60, allowedHits: 15 }),
     validateUserConnectionId,
     userAuth,
     catchAsync(async (req, res) => {

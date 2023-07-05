@@ -24,7 +24,7 @@ module.exports = async (app) => {
       let { page, limit, ...filters } = req.query;
       page = page ? page : 1;
       limit = limit ? limit : 10;
-      let data = filters.filters ? filters.filters : {};
+      let data = filters;
       const user = await service.FilterUsers({
         page,
         limit,
