@@ -1,10 +1,12 @@
 module.exports = {
   authentication_failure: "Token Expired; Invalid Token; Login",
   authentication_forbidden: "No permission for this operation",
+  file_upload_error: "File upload error",
   firstname_format: "Firstname must be a string",
   firstname_null: "Firstname cannot be null",
   id_format: "Id must be a string",
   id_null: "Id cannot be null",
+  file_not_supported: "File is not supported",
   lastname_format: "Lastname must be a string",
   lastname_null: "Lastname cannot be null",
   login_failure: "Invalid credentials",
@@ -13,12 +15,15 @@ module.exports = {
   password_format: "Password must be a string",
   password_length: "Password must be 8 character long or more",
   password_null: "Password cannot be null",
-  password_requirement: "Password must contain Uppercase, Lowercase, Number and Symbol",
+  password_requirement:
+    "Password must contain Uppercase, Lowercase, Number and Symbol",
   rate_limit_exceeded: "Rate Limit Exceeded",
-  res_header_not_accepted: "Response header not accepted",
+  req_header_not_accepted:
+    "Request header Content-Type must be application/json",
   signup_successful: "Signup Successful",
   user_not_found: "User not found",
-  user_connection_already_exists: "User Connection already exists between users",
+  user_connection_already_exists:
+    "User Connection already exists between users",
   user_connection_creation_error: "Cannot create user connection at this time",
   user_connection_error_same_ids: "Cannot create connection between same user",
   user_connection_find_error: "Cannot find user connection at this time",
@@ -32,5 +37,5 @@ module.exports = {
   username_format: "Username must be a string",
   username_null: "Username cannot be null",
   validation_failure: "Validation Failure",
-
+  file_to_wrong_connection: "You can only upload file to your connections",
 };

@@ -16,5 +16,11 @@ module.exports = {
   treblle: {
     apiKey: process.env.TREBLLE_API_KEY,
     projectId: process.env.TREBLLE_PROJECT_ID
+  },
+  
+  cloudinary: {
+    cloudName: process.env.CLOUD_NAME,
+    apiKey: process.env.CLOUDINARY_KEY,
+    apiSecret: process.env.CLOUDINARY_SECRET,
   }
 };

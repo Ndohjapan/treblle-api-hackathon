@@ -24,7 +24,7 @@ const setContentType = (req, res, next) => {
 const contentTypeHeader = (req, res, next) => {
   const acceptHeader = req.get("Content-Type");
   if (acceptHeader !== "application/json") {
-    return next(new NotAcceptedException(en.res_header_not_accepted));
+    return next(new NotAcceptedException(en.req_header_not_accepted));
   }
   next();
 };
