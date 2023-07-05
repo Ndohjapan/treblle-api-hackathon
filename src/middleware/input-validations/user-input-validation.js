@@ -1,4 +1,4 @@
-const { validationResult, param } = require("express-validator");
+const { validationResult, param, check } = require("express-validator");
 const en = require("../../../locale/en");
 const ValidationException = require("../../error/validation-exception");
 const mongoose = require("mongoose");
@@ -27,4 +27,25 @@ const validateUserId = [
   },
 ];
 
-module.exports = { validateUserId };
+const validateUserUpdateInput = [
+  check("firstname")
+    .optional()
+    .bail()
+    .isString()
+    .withMessage(en.firstname_format),
+  check("lastname")
+    .optional()
+    .bail()
+    .isString()
+    .withMessage(en.lastname_format),
+  
+  (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return next(new ValidationException(errors.array()));
+    }
+    next();
+  },
+];
+
+module.exports = { validateUserId, validateUserUpdateInput };
