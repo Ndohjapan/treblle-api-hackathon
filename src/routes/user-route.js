@@ -46,4 +46,18 @@ module.exports = async (app) => {
     })
   );
 
+  app.use(methodAllowed({ methodAllow: "POST" }));
+
+  app.patch(
+    "/api/1.0/users/:id",
+    rateLimiter({ secondsWindow: 60, allowedHits: 10 }),
+    userAuth,
+    catchAsync(async (req, res) => {
+      let data = req.body;
+      let id = req.params.id;
+      const user = await service.UpdateOne(id, data);
+      res.send(user);
+    })
+  );
+
 };

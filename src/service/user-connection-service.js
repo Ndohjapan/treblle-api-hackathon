@@ -50,7 +50,6 @@ class UserConnectionService {
     }
   }
 
-
   async FilterUserConnections({ page, limit, data }) {
     let updateData = {};
 

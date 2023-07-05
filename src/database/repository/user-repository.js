@@ -66,6 +66,11 @@ class UserRepository {
       const user = await User.findOneAndUpdate({ _id: id }, updateData, {
         new: true,
       });
+
+      user.password = undefined;
+      user.createAt = undefined;
+      user.updatedAt = undefined;
+
       return user;
     } catch (error) {
       throw new internalException(en.user_server_error);
