@@ -1,6 +1,6 @@
 const { check, validationResult, param } = require("express-validator");
-const en = require("../../locale/en");
-const ValidationException = require("../error/validation-exception");
+const en = require("../../../locale/en");
+const ValidationException = require("../../error/validation-exception");
 const mongoose = require("mongoose");
 
 const validateCreateUserConnectionInput = [

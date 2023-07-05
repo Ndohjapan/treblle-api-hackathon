@@ -1,6 +1,6 @@
 const { check, validationResult } = require("express-validator");
-const en = require("../../locale/en");
-const ValidationException = require("../error/validation-exception");
+const en = require("../../../locale/en");
+const ValidationException = require("../../error/validation-exception");
 
 const validateUserLoginInput = [
   check("username")
