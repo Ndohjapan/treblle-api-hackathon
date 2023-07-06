@@ -8,7 +8,7 @@ class SessionService {
     this.repository = new SessionRepository();
   }
 
-  async sheduleSessionDelete() {
+  async scheduleSessionDelete() {
     try {
       const data = {
         $expr: {
