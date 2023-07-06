@@ -128,9 +128,3 @@ https://documenter.getpostman.com/view/25678847/2s93zFWype#intro
     npm run test
     ```
 
-## Contributors
-<a href="https://github.com/Ndohjapan/treblle-api-hackathon/graphs/contributors">
-  <p align="center">
-  <img src="https://contrib.rocks/image?repo=Ndohjapan/treblle-api-hackathon" />
-  </p>
-</a>
