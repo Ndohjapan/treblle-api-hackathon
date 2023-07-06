@@ -2,7 +2,7 @@
 
 This is a simple messaging api for a chat application.
 
-### Postman Documentation: 
+### API Documentation: 
 https://documenter.getpostman.com/view/25678847/2s93zFWype#intro
 
 ## Project scope
