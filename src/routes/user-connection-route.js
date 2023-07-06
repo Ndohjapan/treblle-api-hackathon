@@ -26,7 +26,6 @@ module.exports = async (app) => {
       page = page ? page : 1;
       limit = limit ? limit : 10;
       let data = filters;
-      console.log(data, filters);
       const userConnections = await service.FilterUserConnections({page, limit, data});
       res.send(userConnections);
     })

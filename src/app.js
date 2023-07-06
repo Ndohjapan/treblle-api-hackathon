@@ -16,7 +16,7 @@ const treblleConfig = config.get("treblle");
 const errorHandler = require("./error/error-handler");
 const en = require("../locale/en");
 const NotFundException = require("./error/not-found-exception");
-const { auth, connections, user, file } = require("./routes");
+const { auth, connections, user, file, message } = require("./routes");
 const { securityResponseHeader } = require("./middleware/res-header");
 
 const app = express();
@@ -71,6 +71,7 @@ file(app);
 auth(app);
 connections(app);
 user(app);
+message(app);
 
 app.use((req, res, next) => {
   next(new NotFundException(en.page_not_found));

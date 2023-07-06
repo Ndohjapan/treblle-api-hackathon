@@ -135,12 +135,20 @@ describe("Get all with pagination", () => {
   const getUsers = async (page = 1, limit = 10, filters = {}) => {
     let agent = request(app)
       .get("/api/1.0/users")
-      .query({ page, limit, filters })
+      .query({ page, limit })
       .set("Content-Type", "application/json");
 
     if (cookie && token) {
       agent.set("Cookie", cookie);
       agent.set("Authorization", `Bearer ${token}`);
+    }
+
+    if (filters != {}) {
+      Object.entries(filters).forEach(([key, value]) => {
+        let data = {};
+        data[key] = value;
+        agent.query(data);
+      });
     }
 
     return await agent.send();
