@@ -21,7 +21,7 @@ https://documenter.getpostman.com/view/25678847/2s93zFWype#intro
 - Automated tests
   - Unit test thoroughly test functionality of each api
 - Security Measures
-  - Authenticate users 
+  - Authenticate users using `cookies` and `json web tokens`
   - Give proper authroizations to users and admin
   - Enable user friendly rate limiting for each api
 
