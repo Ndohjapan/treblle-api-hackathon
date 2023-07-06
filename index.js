@@ -10,8 +10,12 @@ const PORT = process.env.PORT || 7001;
 // Connect to database
 connectToDatabase();
 // Delete unused sessions
-session.sheduleSessionDelete();
+session.sheduleSessionDelete().then(respone => {
+  console.log(respone);
+}).catch(err => {
+  console.log(err);
+});
 
 app.listen(PORT, async() => {
-    console.log("Server is running on port " + PORT);
+  console.log("Server is running on port " + PORT);
 });
