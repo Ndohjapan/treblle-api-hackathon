@@ -44,6 +44,20 @@ describe("Get by id", () => {
     await getuserConnection(userConnection.id);
     await getuserConnection(userConnection.id);
     await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
     const response = await getuserConnection(userConnection.id);
 
     expect(response.status).toBe(429);
@@ -56,6 +70,20 @@ describe("Get by id", () => {
     token = auth.token;
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
+    await getuserConnection(userConnection.id);
     await getuserConnection(userConnection.id);
     await getuserConnection(userConnection.id);
     await getuserConnection(userConnection.id);
@@ -133,12 +161,20 @@ describe("Get all with pagination", () => {
   const getuserConnections = async (page = 1, limit = 10, filters = {}) => {
     let agent = request(app)
       .get("/api/1.0/connections")
-      .query({ page, limit, filters })
+      .query({ page, limit })
       .set("Content-Type", "application/json");
 
     if (cookie && token) {
       agent.set("Cookie", cookie);
       agent.set("Authorization", `Bearer ${token}`);
+    }
+
+    if (filters != {}) {
+      Object.entries(filters).forEach(([key, value]) => {
+        let data = {};
+        data[key] = value;
+        agent.query(data);
+      });
     }
 
     return await agent.send();
@@ -163,6 +199,15 @@ describe("Get all with pagination", () => {
     await getuserConnections(userConnection.id);
     await getuserConnections(userConnection.id);
     await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
     const response = await getuserConnections(userConnection.id);
 
     expect(response.status).toBe(429);
@@ -175,6 +220,15 @@ describe("Get all with pagination", () => {
     token = auth.token;
     const userConnection = await createUserConnection(users[0].id, users[1].id);
 
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
+    await getuserConnections(userConnection.id);
     await getuserConnections(userConnection.id);
     await getuserConnections(userConnection.id);
     await getuserConnections(userConnection.id);
@@ -258,9 +312,9 @@ describe("Get all with pagination", () => {
     await createUserConnection(users[0].id, users[3].id);
     await createUserConnection(users[1].id, users[2].id);
 
-    const response = await getuserConnections(1, 10, { users: users[0].id });
+    const response = await getuserConnections(1, 25, { users: users[0].id });
 
-    expect(response.body.limit).toBe(10);
+    expect(response.body.limit).toBe(25);
     expect(response.body.totalDocs).toBe(3);
   });
 });

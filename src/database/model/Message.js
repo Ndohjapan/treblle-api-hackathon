@@ -4,9 +4,9 @@ const mongoosePaginate = require("mongoose-paginate-v2");
 const MessageSchema = new mongoose.Schema(
   {
     connectionId: {
-      type:  mongoose.Schema.Types.ObjectId, 
+      type: mongoose.Schema.Types.ObjectId,
       ref: "user-connection",
-      required: true
+      required: true,
     },
     text: {
       type: String,
@@ -15,10 +15,14 @@ const MessageSchema = new mongoose.Schema(
       required: true,
     },
     images: {
-      type: [{type: String }],
+      type: [{ type: String }],
     },
     videos: {
-      type:  [{type: String }],
+      type: [{ type: String }],
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   {

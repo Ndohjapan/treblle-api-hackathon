@@ -13,6 +13,8 @@ module.exports = {
   logout_error: "Error logging out; Try again",
   page_not_found: "Page Not Found",
   password_format: "Password must be a string",
+  images_format: "Images must be an array",
+  images_url_format: "Images must be valid urls",
   password_length: "Password must be 8 character long or more",
   password_null: "Password cannot be null",
   password_requirement:
@@ -25,8 +27,11 @@ module.exports = {
   user_connection_already_exists:
     "User Connection already exists between users",
   user_connection_creation_error: "Cannot create user connection at this time",
+  message_creation_error: "Cannot create message at this time",
   user_connection_error_same_ids: "Cannot create connection between same user",
   user_connection_find_error: "Cannot find user connection at this time",
+  message_delete_error: "Cannot delete message at this time",
+  message_find_error: "Cannot find messages at this time",
   user_connection_not_found: "Cannot find user connection",
   user_creation_error: "Cannot create user at this time",
   user_server_error: "Cannot Find User",
@@ -36,6 +41,8 @@ module.exports = {
   username_exists: "Username already exists",
   username_format: "Username must be a string",
   username_null: "Username cannot be null",
+  text_format: "Text must be a string",
+  text_null: "Text cannot be null",
   validation_failure: "Validation Failure",
   file_to_wrong_connection: "You can only upload file to your connections",
 };

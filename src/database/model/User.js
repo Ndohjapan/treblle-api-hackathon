@@ -35,7 +35,6 @@ const UserSchema = new mongoose.Schema(
 
 UserSchema.plugin(mongoosePaginate);
 
-// Define a query helper to exclude specified fields
 UserSchema.query.excludeFields = function (fields) {
   const projection = fields.reduce((proj, field) => {
     proj[field] = 0; // Exclude the specified field

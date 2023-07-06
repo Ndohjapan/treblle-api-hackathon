@@ -50,6 +50,27 @@ class UserConnectionService {
     }
   }
 
+  async UpdateOne(id, data){
+    let updateData = {};
+
+    data.users = "";
+
+    Object.entries(data).forEach(([key, value]) => {
+      if (value != "") {
+        updateData[key] = value;
+      }
+    });
+    
+    try {
+      const user = await this.repository.UpdateOne({id, updateData});
+    
+      return user;
+        
+    } catch (error) {
+      throw new NotFoundException(en.user_not_found);      
+    }    
+  }
+
   async FilterUserConnections({ page, limit, data }) {
     let updateData = {};
 
