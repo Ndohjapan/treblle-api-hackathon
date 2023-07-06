@@ -2,7 +2,7 @@
 
 This is a simple messaging api for a chat application.
 
-### Postman Documentation: 
+### API Documentation: 
 https://documenter.getpostman.com/view/25678847/2s93zFWype#intro
 
 ## Project scope
@@ -29,7 +29,7 @@ https://documenter.getpostman.com/view/25678847/2s93zFWype#intro
 ## Setup Development Environment
 - ### Create `.env` file
     - Insert Trebble API Key
-    - Insert Cloudinary Keys
+    - Insert Cloudinary Keys : For Uploading Images and Videos
     ```
     TREBLLE_API_KEY=<your treblle api key>
     TREBLLE_PROJECT_ID=<your treblle project id>
@@ -97,7 +97,7 @@ https://documenter.getpostman.com/view/25678847/2s93zFWype#intro
 ## Setup Test
 - ### Create `.env` file
     - Insert Trebble API Key
-    - Insert Cloudinary Keys
+    - Insert Cloudinary Keys : For Uploading Images and Videos
     ```
     TREBLLE_API_KEY=<your treblle api key>
     TREBLLE_PROJECT_ID=<your treblle project id>
