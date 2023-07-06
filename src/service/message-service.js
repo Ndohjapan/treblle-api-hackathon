@@ -3,7 +3,6 @@ const NotFoundException = require("../error/not-found-exception");
 const CreationException = require("../error/creation-exception");
 const MessageRepository = require("../database/repository/message-repository");
 
-
 class MessageService {
   constructor() {
     this.repository = new MessageRepository();
@@ -21,7 +20,7 @@ class MessageService {
 
   async FindById(id) {
     try {
-      const message = await this.repository.FindUserConnectionById(id);
+      const message = await this.repository.FindMessageById(id);
 
       return message;
     } catch (error) {
@@ -52,11 +51,15 @@ class MessageService {
 
   async DeleteMessage(id) {
     try {
-      const message = await this.repository.DeleteOne(id);
+      const isMessage = await this.repository.FindMessageById(id);
+      if (isMessage.id) {
+        const message = await this.repository.DeleteOne(id);
 
-      return message;
+        return message;
+      }
+      throw new Error(en.message_find_error);
     } catch (error) {
-      throw new NotFoundException(en.message_delete_error);
+      throw new NotFoundException(error.message || en.message_delete_error);
     }
   }
 }

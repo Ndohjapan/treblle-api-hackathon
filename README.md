@@ -1,6 +1,9 @@
 # Treblle Hackathon Messaging API
 
-This is a simple messaging from the Springbok dev
+This is a simple messaging api for a chat application.
+
+### Postman Documentation: 
+https://documenter.getpostman.com/view/25678847/2s93zFWype#intro
 
 ## Project scope
 
@@ -94,9 +97,13 @@ This is a simple messaging from the Springbok dev
 ## Setup Test
 - ### Create `.env` file
     - Insert Trebble API Key
+    - Insert Cloudinary Keys
     ```
     TREBLLE_API_KEY=<your treblle api key>
     TREBLLE_PROJECT_ID=<your treblle project id>
+    CLOUD_NAME="<your cloudinary cloud name>"
+    CLOUDINARY_KEY="<your cloudinary key>"
+    CLOUDINARY_SECRET="<your cloudinary secret>"
     ```
 - ### Setup Redis
     You can either set up using docker or on your local computer

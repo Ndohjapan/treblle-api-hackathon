@@ -65,7 +65,7 @@ const validateMessageId = [
     .withMessage(en.id_format)
     .custom((value) => {
       if (!mongoose.Types.ObjectId.isValid(value)) {
-        throw new Error(en.userId_format);
+        throw new Error(en.messageId_format);
       }
       return true;
     }),

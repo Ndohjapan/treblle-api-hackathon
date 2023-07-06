@@ -15,7 +15,9 @@ class MessageRepository {
 
   async FindMessageById(id) {
     try {
-      const message = await Message.findById(id);
+      const message = await Message.findOne({ _id: id, disabled: false });
+      message.disabled = undefined;
+      if (!message) throw new Error();
       return message;
     } catch (error) {
       throw new internalException(en.message_find_error);
@@ -30,9 +32,10 @@ class MessageRepository {
           sort: { createdAt: -1 },
           page,
           limit,
+          select: "-disabled",
         };
 
-        Message.paginate({}, options, function (err, result) {
+        Message.paginate({ disabled: false }, options, function(err, result) {
           if (err) {
             throw Error("Error in getting messages");
           } else {
@@ -47,9 +50,11 @@ class MessageRepository {
 
   async UpdateOne({ id, updateData }) {
     try {
-      const message = await Message.findOneAndUpdate({ _id: id }, updateData, {
-        new: true,
-      });
+      const message = await Message.findOneAndUpdate({ _id: id, disabled: false },
+        updateData, {
+          new: true,
+        }
+      );
       return message;
     } catch (error) {
       throw new internalException(en.message_find_error);
@@ -64,9 +69,12 @@ class MessageRepository {
           sort: { createdAt: -1 },
           page,
           limit,
+          select: "-disabled",
         };
 
-        Message.paginate(data, options, function (err, result) {
+        data = {...data, disabled: false };
+
+        Message.paginate(data, options, function(err, result) {
           if (err) {
             throw Error("Error in getting messages");
           } else {
@@ -79,12 +87,10 @@ class MessageRepository {
     });
   }
 
-  async DeleteOne({ id }) {
+  async DeleteOne(id) {
     try {
-      const message = await Message.findOneAndUpdate(
-        { _id: id, disabled: false },
-        { disabled: true }
-      );
+      const message = await Message.findOneAndUpdate({ _id: id, disabled: false }, { disabled: true }, { new: true });
+      if (!message) throw new Error();
       return message;
     } catch (error) {
       throw new internalException(en.message_delete_error);

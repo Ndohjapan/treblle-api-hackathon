@@ -15,6 +15,7 @@ class UserRepository {
   async FindUserConnectionById(id) {
     try {
       const user = await UserConnection.findById(id).populate("lastMessage");
+      if (!user) throw new Error();
       return user;
     } catch (error) {
       throw new internalException(en.user_connection_find_error);
@@ -31,7 +32,7 @@ class UserRepository {
           limit,
         };
 
-        UserConnection.paginate({}, options, function (err, result) {
+        UserConnection.paginate({}, options, function(err, result) {
           if (err) {
             throw Error("Error in getting user connections");
           } else {
@@ -46,10 +47,8 @@ class UserRepository {
 
   async UpdateOne({ id, updateData }) {
     try {
-      const user = await UserConnection.findOneAndUpdate(
-        { _id: id },
-        updateData,
-        {
+      const user = await UserConnection.findOneAndUpdate({ _id: id },
+        updateData, {
           new: true,
         }
       );
@@ -60,6 +59,7 @@ class UserRepository {
   }
 
   async FilterUserConnections({ page, limit, data }) {
+
     // eslint-disable-next-line no-unused-vars
     return new Promise((resolve, reject) => {
       try {
@@ -69,7 +69,7 @@ class UserRepository {
           limit,
         };
 
-        UserConnection.paginate(data, options, function (err, result) {
+        UserConnection.paginate(data, options, function(err, result) {
           if (err) {
             throw Error("Error in getting users");
           } else {

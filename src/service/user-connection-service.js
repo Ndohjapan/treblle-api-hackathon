@@ -2,10 +2,12 @@ const UserConnectionRepository = require("../database/repository/user-connection
 const en = require("../../locale/en");
 const NotFoundException = require("../error/not-found-exception");
 const CreationException = require("../error/creation-exception");
+const UserRepository = require("../database/repository/user-repository");
 
 class UserConnectionService {
   constructor() {
     this.repository = new UserConnectionRepository();
+    this.userRepository = new UserRepository();
   }
 
   async createUserConnection(myId, otherUserId) {
@@ -13,6 +15,15 @@ class UserConnectionService {
       if (myId === otherUserId) {
         throw new CreationException(en.user_connection_error_same_ids, 400);
       }
+
+      const otherUserIdExists = await this.userRepository.FindUserById(
+        otherUserId
+      );
+
+      if (!otherUserIdExists.id) {
+        throw new CreationException(en.user_server_error, 400);
+      }
+
       const connectionExists = await this.repository.FilterUserConnections({
         page: 1,
         limit: 100,
@@ -33,7 +44,7 @@ class UserConnectionService {
       }
 
       if (error.status === 400) {
-        throw new CreationException(en.user_connection_error_same_ids, 400);
+        throw new CreationException(error.message, 400);
       }
 
       throw new CreationException(en.user_connection_creation_error, 401);
@@ -50,7 +61,7 @@ class UserConnectionService {
     }
   }
 
-  async UpdateOne(id, data){
+  async UpdateOne(id, data) {
     let updateData = {};
 
     data.users = "";
@@ -60,15 +71,14 @@ class UserConnectionService {
         updateData[key] = value;
       }
     });
-    
+
     try {
-      const user = await this.repository.UpdateOne({id, updateData});
-    
+      const user = await this.repository.UpdateOne({ id, updateData });
+
       return user;
-        
     } catch (error) {
-      throw new NotFoundException(en.user_not_found);      
-    }    
+      throw new NotFoundException(en.user_not_found);
+    }
   }
 
   async FilterUserConnections({ page, limit, data }) {

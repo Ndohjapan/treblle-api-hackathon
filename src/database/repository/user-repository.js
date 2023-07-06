@@ -3,9 +3,9 @@ const internalException = require("../../error/internal-exception");
 const { User } = require("../model");
 
 class UserRepository {
-  async CreateUser({firstname, lastname, username, password}){
+  async CreateUser({ firstname, lastname, username, password }) {
     try {
-      await User.create({firstname, lastname, username, password});
+      await User.create({ firstname, lastname, username, password });
       return true;
     } catch (error) {
       throw new internalException(en.user_creation_error);
@@ -31,6 +31,7 @@ class UserRepository {
         "createdAt",
         "updatedAt",
       ]);
+      if (!user) throw new Error();
       return user;
     } catch (error) {
       throw new internalException(en.user_server_error);
@@ -48,7 +49,7 @@ class UserRepository {
           select: "-password",
         };
 
-        User.paginate({}, options, function (err, result) {
+        User.paginate({}, options, function(err, result) {
           if (err) {
             throw Error("Error in getting users");
           } else {
@@ -88,7 +89,7 @@ class UserRepository {
           select: "-password",
         };
 
-        User.paginate(data, options, function (err, result) {
+        User.paginate(data, options, function(err, result) {
           if (err) {
             throw Error("Error in getting users");
           } else {
